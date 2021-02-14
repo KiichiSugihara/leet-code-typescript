@@ -9,7 +9,7 @@ function twoSum(nums: number[], target: number): number[] {
   // sortできない もとのindex必要
   // 探す
   for(let i=0;i<nums.length;i++){
-    for (let j=0;j<nums.length;j++){
+    for (let j=i+1;j<nums.length;j++){
       if(i===j){
         continue
       }
