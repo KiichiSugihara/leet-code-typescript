@@ -7,22 +7,24 @@
 // @lc code=start
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isValid(s: string): boolean {
+  if (s.length <= 1) return false;
+  interface ParenthesesSet {
+    [key: string]: string;
+  }
+  const map: ParenthesesSet = {
+    "(": ")",
+    "[": "]",
+    "{": "}",
+  };
   const wantStack: string[] = [];
+
   for (let i = 0; i < s.length; i++) {
-    switch (s[i]) {
-      case "(":
-        wantStack.push(")");
-        break;
-      case "[":
-        wantStack.push("]");
-        break;
-      case "{":
-        wantStack.push("}");
-        break;
-      default:
-        if (s[i] !== wantStack.pop()) {
-          return false;
-        }
+    if (map[s[i]]) {
+      wantStack.push(map[s[i]]);
+    } else {
+      if (s[i] !== wantStack.pop()) {
+        return false;
+      }
     }
   }
   return wantStack.length === 0;
