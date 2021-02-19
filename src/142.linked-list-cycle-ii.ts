@@ -19,20 +19,15 @@
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function detectCycle(head: ListNode | null): ListNode | null {
-  if (head === null || head.next === null) return null;
-  let fast = head,
-    slow = head;
-
-  while (fast !== null && fast.next !== null) {
-    fast = fast.next.next;
-    slow = slow.next;
-    if (fast === slow) {
-      slow = head;
-      while (slow !== fast) {
-        slow = slow.next;
-        fast = fast.next;
-      }
-      return slow;
+  // set Node,check same Node
+  let curr = head;
+  const set = new Set();
+  while (curr !== null) {
+    if (set.has(curr)) {
+      return curr;
+    } else {
+      set.add(curr);
+      curr = curr.next;
     }
   }
 
