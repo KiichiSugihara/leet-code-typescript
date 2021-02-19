@@ -21,18 +21,18 @@
 function detectCycle(head: ListNode | null): ListNode | null {
   if (head === null || head.next === null) return null;
   let fast = head,
-    slow = head,
-    counter = 0;
+    slow = head;
+
   while (fast !== null && fast.next !== null) {
-    counter++;
     fast = fast.next.next;
     slow = slow.next;
     if (fast === slow) {
-      let returnHead: ListNode;
-      for (let i = 0; i < counter; i++) {
-        returnHead = head.next;
+      slow = head;
+      while (slow !== fast) {
+        slow = slow.next;
+        fast = fast.next;
       }
-      return returnHead;
+      return slow;
     }
   }
 
