@@ -19,11 +19,14 @@
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function deleteDuplicates(head: ListNode | null): ListNode | null {
+  if (!head) {
+    return null;
+  }
   // Input: sorted Nodes
   let current = head;
 
-  while (current) {
-    if (current.next !== null && current.val === current.next.val) {
+  while (current && current.next) {
+    if (current.val === current.next.val) {
       // delete & move
       current.next = current.next.next;
     } else {
