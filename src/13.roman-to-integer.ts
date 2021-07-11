@@ -16,10 +16,17 @@ function romanToInt(s: string): number {
     M: 1000,
   };
   let total = 0;
-  for (let i = 0; i < s.length; i += 1) {
-    symbols[s[i]] < symbols[s[i + 1]]
-      ? (total -= symbols[s[i]])
-      : (total += symbols[s[i]]);
+  for (let i = s.length - 1; i >= 0; i--) {
+    if (
+      (s[i - 1] === "I" && (s[i] === "V" || s[i] === "X")) ||
+      (s[i - 1] === "X" && (s[i] === "L" || s[i] === "C")) ||
+      (s[i - 1] === "C" && (s[i] === "D" || s[i] === "M"))
+    ) {
+      total += symbols[s[i]] - symbols[s[i - 1]];
+      i--;
+    } else {
+      total += symbols[s[i]];
+    }
   }
   return total;
 }
